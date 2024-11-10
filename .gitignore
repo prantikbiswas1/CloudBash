@@ -1,0 +1,51 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+
+# macOS
+.DS_Store
+
+# Flask specific
+instance/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+*.env
+
+# Log files
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.tox/
+.coverage.*
+.cache
+
+# Pytest cache
+.pytest_cache/
+
+# VS Code
+.vscode/
+
+# Ignore build files
+build/
+dist/
+*.egg-info/
+
+# Node.js
+node_modules/
+
+# System files
+Thumbs.db

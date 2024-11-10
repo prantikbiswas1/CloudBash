@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Frequency Analyzer</title>
+</head>
+<body>
+    <h1>Top Word Frequency Analyzer</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL" />
+    <button onclick="analyzeUrl()">Analyze</button>
+
+    <h2>Results:</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Word</th>
+                <th>Frequency</th>
+            </tr>
+        </thead>
+        <tbody id="resultsTable">
+            <!-- Results will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        async function analyzeUrl() {
+            const url = document.getElementById('urlInput').value;
+            const response = await fetch('http://127.0.0.1:5000/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url })
+            });
+
+            const resultsTable = document.getElementById('resultsTable');
+            resultsTable.innerHTML = ''; // Clear previous results
+
+            if (response.ok) {
+                const data = await response.json();
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    const wordCell = document.createElement('td');
+                    const frequencyCell = document.createElement('td');
+
+                    wordCell.textContent = item.word;
+                    frequencyCell.textContent = item.frequency;
+
+                    row.appendChild(wordCell);
+                    row.appendChild(frequencyCell);
+                    resultsTable.appendChild(row);
+                });
+            } else {
+                const errorData = await response.json();
+                alert('Error: ' + errorData.error);
+            }
+        }
+    </script>
+</body>
+</html>
